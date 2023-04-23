@@ -1,0 +1,32 @@
+﻿<Window x:Class="Приложение.AuthorisationAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Приложение"
+        mc:Ignorable="d"
+        Title="AuthorisationAdmin" Height="305" Width="335">
+    <Grid>        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignHeadline5TextBlock}">Авторизация</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Логин:</TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Пароль:</TextBlock>
+        <TextBox Name="txtLogin" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Width="200" Height="35" Text="admin"></TextBox>
+        <PasswordBox Name="pbPassword" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Width="200" Height="35" Password="admin"></PasswordBox>
+        <Button Name="btnAuthorisation" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignRaisedButton}" Width="170" Height="45" FontSize="18" ToolTip="Resource name: MaterialDesignRaisedButton" Click="BtnAuthorisation_Click">Авторизоваться</Button>
+    </Grid>
+</Window>

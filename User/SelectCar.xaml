@@ -1,0 +1,46 @@
+﻿<Window x:Class="Приложение.SelectCar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Приложение"
+        mc:Ignorable="d"
+        Title="SelectCar" Height="550" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="480"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignHeadline5TextBlock}">Выбор автомобиля</TextBlock>
+        <DataGrid Name="GridCar" Grid.Row="3" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" MouseDoubleClick="GridCar_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding name}" Header="Наименование"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding price}" Header="Цена"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Наименование:</TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Цена:</TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Описание</TextBlock>
+        <TextBox Name="txtCarName" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Width="310" Height="35" IsReadOnly="True"></TextBox>
+        <TextBox Name="txtPrice" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Width="150" Height="35" IsReadOnly="True"></TextBox>
+        <TextBox Name="txtDescription" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Width="330" Height="150" IsReadOnly="True" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}"/>
+        <Image Name="imgCar" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="150"></Image>
+        <Button Name="btnCancel" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignRaisedButton}" Width="130" Height="35" FontSize="18" ToolTip="Resource name: MaterialDesignRaisedButton" Click="BtnCancel_Click">Назад</Button>
+        <Button Name="btnConfigurator" Grid.Row="7" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MaterialDesignRaisedButton}" Width="170" Height="35" FontSize="18" Margin="10,0" ToolTip="Resource name: MaterialDesignRaisedButton" Click="BtnConfigurator_Click">Конфигуратор</Button>        
+    </Grid>
+</Window>

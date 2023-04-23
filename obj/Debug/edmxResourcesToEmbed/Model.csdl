@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SerebryannikovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Auth">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="id_Roles" Type="Int32" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_Authorization_Roles" FromRole="Auth" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="CarEquipment" Relationship="Self.FK_SelectedEquipment_car" FromRole="Car" ToRole="CarEquipment" />
+  </EntityType>
+  <EntityType Name="CarEquipment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_Car" Type="Int32" Nullable="false" />
+    <Property Name="id_TypeEquipment" Type="Int32" Nullable="false" />
+    <Property Name="nameEquipment" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descriptionEquipment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Car" Relationship="Self.FK_SelectedEquipment_car" FromRole="CarEquipment" ToRole="Car" />
+    <NavigationProperty Name="TypeEquipment" Relationship="Self.FK_SelectedEquipment_TypeEquipment" FromRole="CarEquipment" ToRole="TypeEquipment" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Auth" Relationship="Self.FK_Authorization_Roles" FromRole="Roles" ToRole="Auth" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TypeEquipment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CarEquipment" Relationship="Self.FK_SelectedEquipment_TypeEquipment" FromRole="TypeEquipment" ToRole="CarEquipment" />
+  </EntityType>
+  <Association Name="FK_Authorization_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Auth" Type="Self.Auth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Auth">
+        <PropertyRef Name="id_Roles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectedEquipment_car">
+    <End Role="Car" Type="Self.Car" Multiplicity="1" />
+    <End Role="CarEquipment" Type="Self.CarEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CarEquipment">
+        <PropertyRef Name="id_Car" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectedEquipment_TypeEquipment">
+    <End Role="TypeEquipment" Type="Self.TypeEquipment" Multiplicity="1" />
+    <End Role="CarEquipment" Type="Self.CarEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeEquipment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CarEquipment">
+        <PropertyRef Name="id_TypeEquipment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DataBaseSerebryannikov1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auth" EntityType="Self.Auth" />
+    <EntitySet Name="Car" EntityType="Self.Car" />
+    <EntitySet Name="CarEquipment" EntityType="Self.CarEquipment" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TypeEquipment" EntityType="Self.TypeEquipment" />
+    <AssociationSet Name="FK_Authorization_Roles" Association="Self.FK_Authorization_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Auth" EntitySet="Auth" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectedEquipment_car" Association="Self.FK_SelectedEquipment_car">
+      <End Role="Car" EntitySet="Car" />
+      <End Role="CarEquipment" EntitySet="CarEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectedEquipment_TypeEquipment" Association="Self.FK_SelectedEquipment_TypeEquipment">
+      <End Role="TypeEquipment" EntitySet="TypeEquipment" />
+      <End Role="CarEquipment" EntitySet="CarEquipment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
